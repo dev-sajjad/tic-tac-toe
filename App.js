@@ -6,7 +6,7 @@ import { StyleSheet, Text, View, Button ,TouchableOpacity,Alert,Modal, Pressable
 
 export default function App() {
    
-   const CustomButton=({text,number})=>{
+   const CustomButton=({text,number,symbol})=>{
       return(
         <Pressable
         style={{alignItems: "center",
@@ -17,6 +17,7 @@ export default function App() {
         width:80,
         borderWidth:2,
         padding: 10}}
+        onPress={()=> symbol(text,number)}
       >
       <Text>
           {text}
@@ -28,10 +29,18 @@ export default function App() {
     
   
     const [buttons,setbuttons]=useState([{button:'1',text:''},{button:2,text:''},{button: 3,text:''},{button: 4,text:''},{button: 5,text:''},{button: 6,text:''},{button: 7,text:''},{button: 8,text:''},{button: 9,text:''}]);
+    const [turn,setturn]=useState(true)
     const playersymbol=(txt,index)=>{
+      if(txt==''){
       let temp=[...buttons]
-      temp[number].text='0'
+      if(turn==1)
+      temp[index-1].text='0'
+      else
+      temp[index-1].text='X'
       setbuttons(temp)
+      setturn(!turn)
+      }
+
     }
   return (
     
@@ -55,7 +64,7 @@ export default function App() {
         numColumns={3}
         data={[...buttons]}
         renderItem={({item},index)=>(
-          <CustomButton text={item.text} number={item.button} />
+          <CustomButton text={item.text} number={item.button} symbol={playersymbol}/>
         )}
         
         />
