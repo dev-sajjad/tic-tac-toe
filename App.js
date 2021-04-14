@@ -97,11 +97,11 @@ export default function App() {
       }
       else if(temp[2].text.toString()=='X' && temp[4].text.toString()=='X' && temp[6].text.toString()=='X'){
         setmodel(true)
-      }
-      
-
-      
+      }  
   
+  }
+  const playagain=()=>{
+Alert.alert("Hi")
   }
   return (
     
@@ -133,8 +133,18 @@ export default function App() {
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5}}>
+      <Text style={{fontSize:20,margin:5}}>Congratulation</Text>
        <Text>Player {!turn ? 1:2} Wins</Text>
-      </View>
+       <TouchableOpacity
+        style={{alignItems: "center",
+        backgroundColor: "#DC143C",
+        padding: 10,
+      margin:10}}
+        onPress={playagain.bind()}
+      >
+        <Text style={{color:"white"}}>Play Again</Text>
+      </TouchableOpacity>
+        </View>
       </View>
         </Modal>
         <Header game_title="Tic Tac Toe" />
