@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Button ,TouchableOpacity,Alert,Modal, Pressable, FlatList} from 'react-native';
 
 
@@ -18,6 +18,7 @@ export default function App() {
         borderWidth:2,
         padding: 10}}
         onPress={()=> symbol(text,number)}
+        
       >
       <Text>
           {text}
@@ -31,7 +32,8 @@ export default function App() {
     const [buttons,setbuttons]=useState([{button:'1',text:''},{button:2,text:''},{button: 3,text:''},{button: 4,text:''},{button: 5,text:''},{button: 6,text:''},{button: 7,text:''},{button: 8,text:''},{button: 9,text:''}]);
     const [turn,setturn]=useState(true)
     const [getmodel,setmodel]=useState(false)
-   
+    
+ 
     const playersymbol=(txt,index)=>{
       if(txt==''){
       let temp=[...buttons]
@@ -41,9 +43,66 @@ export default function App() {
       temp[index-1].text='X'
       setbuttons(temp)
       setturn(!turn)
+      check();
+     
       }
 
     }
+    const check=()=>{
+     let temp=[...buttons]
+      if(temp[0].text.toString()=='0' && temp[1].text.toString()=='0' && temp[2].text.toString()=='0'){
+        setmodel(true)
+       }
+       else if(temp[3].text.toString()=='0' && temp[4].text.toString()=='0' && temp[5].text.toString()=='0'){
+        setmodel(true)
+      }
+      else if(temp[6].text.toString()=='0' && temp[7].text.toString()=='0' && temp[8].text.toString()=='0'){
+        setmodel(true)
+      }
+      else if(temp[0].text.toString()=='0' && temp[3].text.toString()=='0' && temp[6].text.toString()=='0'){
+        setmodel(true)
+      }
+      else if(temp[1].text.toString()=='0' && temp[4].text.toString()=='0' && temp[7].text.toString()=='0'){
+        setmodel(true)
+      }
+      else if(temp[2].text.toString()=='0' && temp[5].text.toString()=='0' && temp[8].text.toString()=='0'){
+        setmodel(true)
+      }
+      else if(temp[0].text.toString()=='0' && temp[4].text.toString()=='0' && temp[8].text.toString()=='0'){
+        setmodel(true)
+      }
+      else if(temp[2].text.toString()=='0' && temp[4].text.toString()=='0' && temp[6].text.toString()=='0'){
+        setmodel(true)
+      }
+      else if(temp[0].text.toString()=='X' && temp[1].text.toString()=='X' && temp[2].text.toString()=='X'){
+        setmodel(true)
+       }
+       else if(temp[3].text.toString()=='X' && temp[4].text.toString()=='X' && temp[5].text.toString()=='X'){
+        setmodel(true)
+      }
+      else if(temp[6].text.toString()=='X' && temp[7].text.toString()=='X' && temp[8].text.toString()=='X'){
+        setmodel(true)
+      }
+      else if(temp[0].text.toString()=='X' && temp[3].text.toString()=='X' && temp[6].text.toString()=='X'){
+        setmodel(true)
+      }
+      else if(temp[1].text.toString()=='X' && temp[4].text.toString()=='X' && temp[7].text.toString()=='X'){
+        setmodel(true)
+      }
+      else if(temp[2].text.toString()=='X' && temp[5].text.toString()=='X' && temp[8].text.toString()=='X'){
+        setmodel(true)
+      }
+      else if(temp[0].text.toString()=='X' && temp[4].text.toString()=='X' && temp[8].text.toString()=='X'){
+        setmodel(true)
+      }
+      else if(temp[2].text.toString()=='X' && temp[4].text.toString()=='X' && temp[6].text.toString()=='X'){
+        setmodel(true)
+      }
+      
+
+      
+  
+  }
   return (
     
     
@@ -61,7 +120,7 @@ export default function App() {
     justifyContent: "center",
   
     }}>
-    <View style={{ margin: 20,
+    <View style={{ marginTop: 200,
     backgroundColor: "white",
     borderRadius: 20,
     padding: 35,
@@ -74,7 +133,7 @@ export default function App() {
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5}}>
-       
+       <Text>Player {!turn ? 1:2} Wins</Text>
       </View>
       </View>
         </Modal>
@@ -95,7 +154,7 @@ export default function App() {
         numColumns={3}
         data={[...buttons]}
         renderItem={({item},index)=>(
-          <CustomButton text={item.text} number={item.button} symbol={playersymbol}/>
+          <CustomButton text={item.text} number={item.button} symbol={playersymbol} />
         )}
         
         />
